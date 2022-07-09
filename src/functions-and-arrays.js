@@ -1,12 +1,46 @@
 // Iteration #1: Find the maximum
-function maxOfTwoNumbers() {}
+function maxOfTwoNumbers(num1, num2) {
+  //check if enough arguments
+  if(arguments.length < 2) {
+    return 'Need two numbers';
+  }
+  
+  if(num1 > num2) {
+    return num1;
+  }
+  else return num2;
+}
 
 
 
 // Iteration #2: Find longest word
 const words = ['mystery', 'brother', 'aviator', 'crocodile', 'pearl', 'orchard', 'crackpot'];
 
-function findLongestWord() {}
+function findLongestWord(arr) {
+  // check if argument present
+  if(!arguments.length) {
+    return 'Need an argument';
+  }
+
+  //check if array empty
+  if (!arr.length) {
+    return null;
+  }
+
+  /* need a temporary variable to store the top length scanned so far.
+  At first I initialised it with '0', but then I realised 
+  I could go ahead with the first element of the array */
+  let max = arr[0].length;
+  // same as above, but for the actual string
+  let longestWord = arr[0];
+  for(i in arr) {
+    if (arr[i].length > max) {
+      max = arr[i].length;
+      longestWord = arr[i];
+    }
+  }
+  return longestWord; 
+}
 
 
 
