@@ -47,12 +47,66 @@ function findLongestWord(arr) {
 // Iteration #3: Calculate the sum
 const numbers = [6, 12, 1, 18, 13, 16, 2, 1, 8, 10];
 
-function sumNumbers() {}
+function sumNumbers(arr) {
+  // check if argument present
+  if(!arguments.length) {
+    return 'Need an argument';
+  }
+
+  //check if array empty
+  if (!arr.length) {
+    return 0;
+  }
+  let sum = 0;
+  for(i in arr) {
+    sum += arr[i];
+  }
+
+  return sum;
+}
 
 
 
 // Iteration #3.1 Bonus:
-function sum() {}
+function sum(arr) {
+  // check if argument present
+  if(!arguments.length) {
+    return 'Need an argument';
+  }
+  //check if array empty
+  if (!arr.length) {
+    return 0;
+  }
+  let sum = 0;
+  const err = "Unsupported data type sir or ma'am";
+  for (i in arr) {
+    //check typeof input
+    switch(typeof(arr[i])) {
+      //only need to add '1' if it's 'true' otherwise, adding 0 is redundant
+      case "boolean":
+        if(arr[i]) {
+          sum++;
+        }
+        break;
+      case "string":
+        sum += arr[i].length;
+        break;
+      //-----below not working
+      case "array":
+      case "object":
+        return err;
+      //^^^^^^^^^^^^
+      default:
+        sum += arr[i];
+    }
+    //below not working
+    if(typeof(arr[i]) == "object" || typeof(arr[i]) == "array") {
+      return err;
+    }
+  }
+  return sum;
+
+}
 
 
 
@@ -60,16 +114,52 @@ function sum() {}
 // Level 1: Array of numbers
 const numbersAvg = [2, 6, 9, 10, 7, 4, 1, 9];
 
-function averageNumbers() {}
+function averageNumbers(arr) {
+  // check if argument present
+  if(!arguments.length) {
+    return 'Need an argument';
+  }
+  //check if array empty
+  if (!arr.length) {
+    return null;
+  }
+  return sumNumbers(arr)/arr.length;
+
+}
 
 
 // Level 2: Array of strings
 const wordsArr = ['seat', 'correspond', 'linen', 'motif', 'hole', 'smell', 'smart', 'chaos', 'fuel', 'palace'];
 
-function averageWordLength() { }
+function averageWordLength(arr) {
+  // check if argument present
+  if(!arguments.length) {
+    return 'Need an argument';
+  }
+  //check if array empty
+  if (!arr.length) {
+    return null;
+  }
+  
+  let sum = 0;
+  for (i in arr) {
+    sum += arr[i].length;
+  }
+  return sum/arr.length;
+ }
 
 // Bonus - Iteration #4.1
-function avg() {}
+function avg(arr) {
+  // check if argument present
+  if(!arguments.length) {
+    return 'Need an argument';
+  }
+  //check if array empty
+  if (!arr.length) {
+    return null;
+  }
+  return sum(arr)/arr.length;
+}
 
 // Iteration #5: Unique arrays
 const wordsUnique = [
