@@ -78,7 +78,6 @@ function sum(arr) {
     return 0;
   }
   let sum = 0;
-  const err = "Unsupported data type sir or ma'am";
   for (i in arr) {
     //check typeof input
     switch(typeof(arr[i])) {
@@ -91,18 +90,14 @@ function sum(arr) {
       case "string":
         sum += arr[i].length;
         break;
-      //-----below not working
-      case "array":
-      case "object":
-        return err;
-      //^^^^^^^^^^^^
-      default:
+      case "number":
         sum += arr[i];
+        break;
+      default:
+        throw new Error("Unsupported data type sir or ma'am"); // not working :(
     }
-    //below not working
-    if(typeof(arr[i]) == "object" || typeof(arr[i]) == "array") {
-      return err;
-    }
+    
+    
   }
   return sum;
 
@@ -176,14 +171,38 @@ const wordsUnique = [
   'bring'
 ];
 
-function uniquifyArray() {}
+function uniquifyArray(arr) {
+  // check if argument present
+  if(!arguments.length) {
+    return 'Need an argument';
+  }
+  //check if array empty
+  if (!arr.length) {
+    return null;
+  }
+  let uniqArr =[];
+  arr.forEach(element => {
+    //if not included already in uniqArr, add it
+    if(!uniqArr.includes(element)) {
+      uniqArr.push(element);
+    }  
+  });
+  return uniqArr;
+}
 
 
 
 // Iteration #6: Find elements
 const wordsFind = ['machine', 'subset', 'trouble', 'starting', 'matter', 'eating', 'truth', 'disobedience'];
 
-function doesWordExist() {}
+function doesWordExist(arr, word) {
+
+  //check if array empty
+  if (!arr.length) {
+    return null;
+  }
+  return arr.includes(word);
+}
 
 
 
@@ -202,7 +221,20 @@ const wordsCount = [
   'matter'
 ];
 
-function howManyTimes() {}
+function howManyTimes(arr, word) {
+  //check if array empty
+  if (!arr.length) {
+    return 0;
+  }
+  let counter = 0;
+  arr.forEach(elem => {
+    if(word === elem) {
+      counter++;
+    }  
+  });
+  return counter;
+  
+}
 
 
 
@@ -230,8 +262,38 @@ const matrix = [
   [1, 70, 54, 71, 83, 51, 54, 69, 16, 92, 33, 48, 61, 43, 52, 1, 89, 19, 67, 48]
 ];
 
-function greatestProduct() {}
+function greatestProduct(matrix) {
 
+  let maxX = 0;
+  let maxY = 0;
+   // find the largest multiplier on X axis
+  for (i=0;i<matrix.length;i++) {
+    for (j=0;j<matrix.length;j++) {
+      //make there are 4 values to multiply
+      if (j<matrix.length - 4){
+        let tempProdX = matrix[i][j] * matrix[i][j+1] * matrix[i][j+2] * matrix[i][j+3];
+        if (tempProdX > maxX) {
+          maxX = tempProdX;
+        }
+      }   
+    }
+      // find the largest multiplier on Y axis
+    for (j=0;j<matrix.length;j++) {
+      //make there are 4 values to multiply
+      if(i<matrix.length - 4) {
+        let tempProdY = matrix[i][j] * matrix[i+1][j] * matrix[i+2][j] * matrix[i+3][j];
+        if (tempProdY > maxY) {
+          maxY = tempProdY;
+        }  
+      }
+    }
+  }
+  //compare and return
+  if(maxY > maxX) {
+    return maxY;
+  }
+  else return maxX;
+}
 
 
 
